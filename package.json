@@ -12,6 +12,9 @@
   },
   "keywords": [],
   "author": "Lambda School",
+  "jest": {
+    "testEnvironment": "node"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/LambdaSchool/Sprint-Challenge-Authentication/issues"
@@ -29,6 +32,9 @@
     "sqlite3": "^4.0.8"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "eslint": "^6.1.0",
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   }
 }
