@@ -1,8 +1,11 @@
 const axios = require('axios');
 const bcrypt = require('bcryptjs');
 const db = require('../database/dbConfig');
+
 const jwt = require('jsonwebtoken');
-const secret = require('./secret');
+
+// const jwtKey = require('../_secrets/key').jwtKey;
+const secret = require('../config/secret');
 const { authenticate } = require('../auth/authenticate');
 
 module.exports = server => {
@@ -17,13 +20,6 @@ module.exports = server => {
   const hash = bcrypt.hashSync(credentials.password, 10);
   credentials.password = hash;
 
-//   try {
-//     const users = await db.insert(credentials);
-//       res.status(201).json(users)
-//   } catch (error) {
-//       res.status(500).json({ message: 'could not register new user'})
-//     }
-// }
   db('users')
     .insert(credentials)
     .then(ids => {
@@ -37,7 +33,7 @@ module.exports = server => {
 
 function login(req, res) {
   // implement user login
-  let { username, password} = req.body;
+  let { username, password } = req.body;
  db('users')
   .where({ username })
   .first()
@@ -67,7 +63,6 @@ function generateToken(user){
   }
   return jwt.sign(payload, secret.jwtSecrets, options)
 }
-
 
 
 function getJokes(req, res) {
